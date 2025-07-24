@@ -1,2 +1,2 @@
 # Arleuza Sabor DuBom
-https://grlti.github.io/arleuza/
+https://grlti.github.io/arleuza
