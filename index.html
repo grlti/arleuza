@@ -287,7 +287,7 @@
 
         /* Mobile Menu */
         .mobile-menu {
-            display: none;
+            display: none; /* Oculta o ícone do hamburguer por padrão em telas maiores */
             flex-direction: column;
             cursor: pointer;
             z-index: 1001;
@@ -1149,12 +1149,57 @@
                 margin-bottom: 2.5rem;
             }
             
+            /* Oculta os links de navegação padrão em telas menores */
             .nav-center {
-                display: none;
+                display: flex; /* Garante que o flexbox seja aplicado para layout vertical */
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh; /* Altura total da viewport */
+                background: var(--white); /* Fundo do menu móvel */
+                z-index: 998; /* Para ficar abaixo do botão de fechar/hamburguer se houver */
+                justify-content: center;
+                align-items: center;
+                transform: translateX(100%); /* Oculta o menu fora da tela à direita */
+                transition: transform 0.3s ease-out, opacity 0.3s ease-out; /* Adiciona transição suave */
+                opacity: 0; /* Começa invisível */
+                pointer-events: none; /* Impede interações quando o menu está oculto */
             }
             
+            /* Esta regra assumirá que a classe 'menu-open' é adicionada ao elemento <nav> pelo JavaScript */
+            /* para abrir o menu. Ex: document.querySelector('nav').classList.add('menu-open'); */
+            nav.menu-open .nav-center {
+                transform: translateX(0); /* Desliza o menu para a vista */
+                opacity: 1; /* Torna o menu visível */
+                pointer-events: all; /* Permite interações */
+            }
+
+            .nav-links {
+                flex-direction: column; /* Links empilhados verticalmente */
+                gap: 2rem; /* Espaçamento entre os links */
+                list-style: none;
+                padding: 0;
+                text-align: center;
+            }
+
+            .nav-links a {
+                font-size: 1.8rem; /* Aumenta o tamanho da fonte para mobile */
+                padding: 10px 0;
+                display: block; /* Garante que cada link ocupe sua própria linha e seja mais fácil de tocar */
+                width: fit-content; /* Adapta a largura ao conteúdo do texto */
+                margin: 0 auto; /* Centraliza os links */
+            }
+
+            .nav-links a::after {
+                height: 3px; /* Sutilmente mais grosso para destacar no mobile */
+                bottom: -8px;
+            }
+
             .mobile-menu {
-                display: flex;
+                display: flex; /* Exibe o ícone do menu hamburguer */
+                z-index: 999; /* Garante que ele esteja acima do menu de navegação */
             }
             
             .products-grid {
@@ -1628,7 +1673,7 @@
             checkInstallPrompt();
         });
 
-        // Theme Management
+         // Theme Management
         function initializeTheme() {
             const savedTheme = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
@@ -1858,7 +1903,18 @@
             // Mobile menu
             mobileMenu.addEventListener('click', function() {
                 this.classList.toggle('active');
-                // Add mobile menu functionality here
+                // Adiciona/remove a classe 'menu-open' no elemento <nav> para controlar a visibilidade do menu
+                document.querySelector('nav').classList.toggle('menu-open');
+            });
+
+            // Fecha o menu móvel ao clicar em um link de navegação
+            document.querySelectorAll('.nav-links a').forEach(anchor => {
+                anchor.addEventListener('click', function() {
+                    if (mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        document.querySelector('nav').classList.remove('menu-open');
+                    }
+                });
             });
 
             // Product actions
@@ -2001,4 +2057,4 @@
     </script>
 </body>
 </html>
-
+�
