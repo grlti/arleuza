@@ -635,14 +635,47 @@
             padding: 2rem;
             border-bottom: 1px solid var(--border);
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column; /* Changed to column for stacking */
+            align-items: flex-start; /* Align items to the start */
+            position: relative; /* For positioning close button */
         }
 
         .cart-header h3 {
             font-size: 1.5rem;
             color: var(--secondary);
+            margin-bottom: 1rem; /* Added margin for spacing */
         }
+
+        .cart-header .form-group {
+            width: 100%; /* Make form groups full width */
+            margin-bottom: 1rem; /* Spacing between form groups */
+        }
+
+        .cart-header .form-group label {
+            margin-bottom: 0.5rem;
+            display: block;
+            font-weight: 500;
+            color: var(--secondary);
+        }
+
+        .cart-header .form-group input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            background: var(--white);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .cart-header .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(212, 167, 106, 0.2);
+        }
+
 
         .close-cart {
             background: none;
@@ -653,6 +686,9 @@
             padding: 0.5rem;
             border-radius: 50%;
             transition: all 0.3s ease;
+            position: absolute; /* Position relative to cart-header */
+            top: 1rem;
+            right: 1rem;
         }
 
         .close-cart:hover {
@@ -1477,7 +1513,9 @@
                             <button class="favorite-btn" data-product="palito provolone 1kg">
                                 ❤️
                             </button>
-                
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1580,9 +1618,17 @@
         </div>
     </footer>
 
- <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
             <h3>Seu Carrinho</h3>
+            <div class="form-group">
+                <label for="buyerName">Seu Nome:</label>
+                <input type="text" id="buyerName" name="buyerName" placeholder="Nome Completo">
+            </div>
+            <div class="form-group">
+                <label for="buyerPhone">Seu Telefone:</label>
+                <input type="tel" id="buyerPhone" name="buyerPhone" placeholder="(00) 00000-0000">
+            </div>
             <button class="close-cart" id="closeCart">✕</button>
         </div>
         <div class="cart-items" id="cartItems">
@@ -1820,7 +1866,17 @@
                 return;
             }
 
+            const buyerName = document.getElementById('buyerName').value;
+            const buyerPhone = document.getElementById('buyerPhone').value;
+
+            if (!buyerName || !buyerPhone) {
+                showNotification('Por favor, preencha seu nome e telefone para finalizar o pedido.', 'error');
+                return;
+            }
+
             let message = 'Olá! Gostaria de fazer o seguinte pedido:\n\n';
+            message += `Nome do Cliente: ${buyerName}\n`;
+            message += `Telefone do Cliente: ${buyerPhone}\n\n`;
             
             cart.forEach(item => {
                 message += `${item.emoji} ${item.name}\n`;
@@ -1845,6 +1901,10 @@
             closeCartSidebar();
             
             showNotification('Redirecionando para o WhatsApp!', 'success');
+            
+            // Clear name and phone fields after checkout
+            document.getElementById('buyerName').value = '';
+            document.getElementById('buyerPhone').value = '';
         }
 
         // Notifications
@@ -1984,8 +2044,16 @@
                 showNotification('Redirecionando para o WhatsApp!', 'success');
             });
 
-            // Phone formatting
+            // Phone formatting for contact form
             document.getElementById('phone').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+                value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+                e.target.value = value;
+            });
+
+            // Phone formatting for buyerPhone in cart
+            document.getElementById('buyerPhone').addEventListener('input', function(e) {
                 let value = e.target.value.replace(/\D/g, '');
                 value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
                 value = value.replace(/(\d)(\d{4})$/, '$1-$2');
