@@ -638,6 +638,7 @@
             flex-direction: column; /* Changed to column for stacking */
             align-items: flex-start; /* Align items to the start */
             position: relative; /* For positioning close button */
+            flex-shrink: 0; /* Adicionado para evitar que o cabeçalho encolha */
         }
 
         .cart-header h3 {
@@ -795,6 +796,7 @@
             padding: 2rem;
             border-top: 1px solid var(--border);
             background: var(--light);
+            flex-shrink: 0; /* Adicionado para evitar que o rodapé encolha */
         }
 
         .cart-total {
