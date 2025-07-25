@@ -660,6 +660,41 @@
             color: var(--danger);
         }
 
+        .cart-customer-info {
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cart-customer-info .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .cart-customer-info label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .cart-customer-info input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            background: var(--white);
+            color: var(--text);
+        }
+
+        .cart-customer-info input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(212, 167, 106, 0.2);
+        }
+
         .cart-items {
             flex: 1;
             overflow-y: auto;
@@ -1576,7 +1611,11 @@
                     <a href="#" aria-label="WhatsApp">📱</a>
                 </div>
                 <p class="copyright">&copy; 2025 Arleuza - Sabor DuBom.</p>
-            <div class="cart-sidebar" id="cartSidebar">
+            </div>
+        </div>
+    </footer>
+
+ <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
             <h3>Seu Carrinho</h3>
             <button class="close-cart" id="closeCart">✕</button>
@@ -1644,6 +1683,8 @@
         const installBtn = document.getElementById('installBtn');
         const dismissBtn = document.getElementById('dismissBtn');
         const mobileMenu = document.getElementById('mobileMenu');
+        const customerNameInput = document.getElementById('customerName');
+        const customerPhoneInput = document.getElementById('customerPhone');
 
         // Initialize App
         document.addEventListener('DOMContentLoaded', function() {
@@ -1667,6 +1708,10 @@
             
             // Check for install prompt
             checkInstallPrompt();
+
+            // Load saved customer info
+            customerNameInput.value = localStorage.getItem('customerName') || '';
+            customerPhoneInput.value = localStorage.getItem('customerPhone') || '';
         });
 
          // Theme Management
@@ -1826,7 +1871,20 @@
                 return;
             }
 
-            let message = 'Olá! Gostaria de fazer o seguinte pedido:\n\n';
+            const customerName = customerNameInput.value.trim();
+            const customerPhone = customerPhoneInput.value.trim();
+
+            if (!customerName || !customerPhone) {
+                showNotification('Por favor, preencha seu nome e WhatsApp para finalizar o pedido.', 'error');
+                return;
+            }
+
+            localStorage.setItem('customerName', customerName);
+            localStorage.setItem('customerPhone', customerPhone);
+
+
+            let message = `Olá! Meu nome é ${customerName} e meu WhatsApp é ${customerPhone}.\n\n`;
+            message += 'Gostaria de fazer o seguinte pedido:\n\n';
             
             cart.forEach(item => {
                 message += `${item.emoji} ${item.name}\n`;
@@ -1990,8 +2048,16 @@
                 showNotification('Redirecionando para o WhatsApp!', 'success');
             });
 
-            // Phone formatting
+            // Phone formatting for contact form
             document.getElementById('phone').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+                value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+                e.target.value = value;
+            });
+
+            // Phone formatting for cart customer info
+            customerPhoneInput.addEventListener('input', function(e) {
                 let value = e.target.value.replace(/\D/g, '');
                 value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
                 value = value.replace(/(\d)(\d{4})$/, '$1-$2');
