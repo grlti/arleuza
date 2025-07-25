@@ -623,7 +623,7 @@
         .cart-sidebar {
             position: fixed;
             top: 0;
-            right: -400px;
+            right: -400px; /* Esconde o carrinho inicialmente */
             width: 400px;
             height: 100vh;
             background: var(--white);
@@ -636,25 +636,25 @@
         }
 
         .cart-sidebar.open {
-            right: 0;
+            right: 0; /* Mostra o carrinho */
         }
 
         .cart-header {
-            padding: 1.5rem 2rem; /* Ajustado padding */
+            padding: 1.5rem 2rem;
             border-bottom: 1px solid var(--border);
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             position: relative;
-            flex-shrink: 0;
+            flex-shrink: 0; /* Garante que o cabeçalho não encolha */
         }
 
         .cart-header h3 {
-            font-size: 1.8rem; /* Aumentado tamanho da fonte */
+            font-size: 1.8rem;
             color: var(--secondary);
-            margin-bottom: 1.2rem; /* Ajustado margem */
-            width: 100%; /* Garante que o título ocupe a largura total */
-            text-align: center; /* Centraliza o título */
+            margin-bottom: 1.2rem;
+            width: 100%;
+            text-align: center;
         }
 
         .cart-header .form-group {
@@ -663,21 +663,21 @@
         }
 
         .cart-header .form-group label {
-            margin-bottom: 0.6rem; /* Aumentado margem */
+            margin-bottom: 0.6rem;
             display: block;
             font-weight: 500;
             color: var(--secondary);
-            font-size: 0.95rem; /* Ajustado tamanho da fonte */
+            font-size: 0.95rem;
         }
 
         .cart-header .form-group input {
             width: 100%;
-            padding: 12px 15px; /* Aumentado padding */
+            padding: 12px 15px;
             border: 1px solid var(--border);
-            border-radius: 10px; /* Mais arredondado */
+            border-radius: 10px;
             font-size: 1rem;
             font-family: 'Poppins', sans-serif;
-            background: var(--gray); /* Fundo sutilmente diferente */
+            background: var(--gray);
             color: var(--text);
             transition: all 0.3s ease;
         }
@@ -685,14 +685,14 @@
         .cart-header .form-group input:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(212, 167, 106, 0.3); /* Sombra mais visível */
-            background: var(--white); /* Fundo branco ao focar */
+            box-shadow: 0 0 0 4px rgba(212, 167, 106, 0.3);
+            background: var(--white);
         }
 
         .close-cart {
             background: none;
             border: none;
-            font-size: 1.8rem; /* Aumentado tamanho */
+            font-size: 1.8rem;
             cursor: pointer;
             color: var(--text);
             padding: 0.5rem;
@@ -701,34 +701,34 @@
             position: absolute;
             top: 1rem;
             right: 1rem;
-            line-height: 1; /* Para centralizar o 'X' */
+            line-height: 1;
         }
 
         .close-cart:hover {
             background: var(--light);
             color: var(--danger);
-            transform: rotate(90deg); /* Efeito ao passar o mouse */
+            transform: rotate(90deg);
         }
 
         .cart-items {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1rem 2rem; /* Ajustado padding */
+            flex: 1; /* Permite que os itens do carrinho ocupem o espaço restante */
+            overflow-y: auto; /* Adiciona rolagem se o conteúdo exceder a altura */
+            padding: 1rem 2rem;
             -webkit-overflow-scrolling: touch; /* Rolagem suave em iOS */
-            padding-bottom: 150px; /* Adicionado padding-bottom para não esconder o botão flutuante */
+            padding-bottom: 150px; /* Espaço para o botão de checkout fixo */
         }
 
         .cart-item {
             display: flex;
             align-items: center;
-            gap: 1.2rem; /* Aumentado espaçamento */
-            padding: 1rem 0; /* Ajustado padding */
+            gap: 1.2rem;
+            padding: 1rem 0;
             border-bottom: 1px solid var(--border);
             transition: all 0.3s ease;
         }
 
         .cart-item:last-child {
-            border-bottom: none; /* Remove a borda do último item */
+            border-bottom: none;
         }
 
         .cart-item:hover {
@@ -736,16 +736,16 @@
         }
 
         .cart-item-image {
-            width: 70px; /* Aumentado tamanho */
-            height: 70px; /* Aumentado tamanho */
+            width: 70px;
+            height: 70px;
             background: linear-gradient(45deg, var(--primary), var(--accent));
-            border-radius: 15px; /* Mais arredondado */
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem; /* Aumentado tamanho do emoji */
+            font-size: 2rem;
             color: var(--white);
-            flex-shrink: 0; /* Garante que a imagem não encolha */
+            flex-shrink: 0;
         }
 
         .cart-item-details {
@@ -755,29 +755,29 @@
         .cart-item-name {
             font-weight: 600;
             color: var(--secondary);
-            margin-bottom: 0.4rem; /* Ajustado margem */
-            font-size: 1.1rem; /* Aumentado tamanho da fonte */
+            margin-bottom: 0.4rem;
+            font-size: 1.1rem;
         }
 
         .cart-item-price {
             color: var(--primary);
             font-weight: 600;
-            font-size: 1.05rem; /* Aumentado tamanho da fonte */
+            font-size: 1.05rem;
         }
 
         .cart-item-quantity {
             display: flex;
             align-items: center;
-            gap: 0.8rem; /* Aumentado espaçamento */
-            margin-top: 0.6rem; /* Aumentado margem */
-            background: var(--gray); /* Fundo sutil */
-            border-radius: 20px; /* Arredondado */
-            padding: 0.3rem; /* Padding interno */
+            gap: 0.8rem;
+            margin-top: 0.6rem;
+            background: var(--gray);
+            border-radius: 20px;
+            padding: 0.3rem;
         }
 
         .cart-item-quantity button {
-            width: 30px; /* Aumentado tamanho */
-            height: 30px; /* Aumentado tamanho */
+            width: 30px;
+            height: 30px;
             border: 1px solid var(--border);
             background: var(--white);
             border-radius: 50%;
@@ -785,10 +785,10 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1rem; /* Aumentado tamanho da fonte */
+            font-size: 1rem;
             font-weight: bold;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra sutil */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .cart-item-quantity button:hover {
@@ -799,10 +799,10 @@
         }
 
         .cart-item-quantity span {
-            min-width: 35px; /* Aumentado largura mínima */
+            min-width: 35px;
             text-align: center;
             font-weight: 600;
-            font-size: 1.1rem; /* Aumentado tamanho da fonte */
+            font-size: 1.1rem;
             color: var(--secondary);
         }
 
@@ -811,11 +811,11 @@
             border: none;
             color: var(--danger);
             cursor: pointer;
-            font-size: 1.4rem; /* Aumentado tamanho */
+            font-size: 1.4rem;
             padding: 0.5rem;
             border-radius: 50%;
             transition: all 0.3s ease;
-            flex-shrink: 0; /* Garante que o botão não encolha */
+            flex-shrink: 0;
         }
 
         .remove-item:hover {
@@ -825,20 +825,20 @@
         }
 
         .cart-footer {
-            padding: 1.5rem 2rem; /* Ajustado padding */
+            padding: 1.5rem 2rem;
             border-top: 1px solid var(--border);
             background: var(--light);
             flex-shrink: 0;
-            box-shadow: 0 -5px 15px var(--shadow); /* Sombra para destacar o rodapé */
-            z-index: 10; /* Garante que fique acima dos itens ao rolar */
+            box-shadow: 0 -5px 15px var(--shadow);
+            z-index: 10;
         }
 
         .cart-total {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0; /* Removido margin-bottom, já que o botão foi movido */
-            font-size: 1.3rem; /* Aumentado tamanho da fonte */
+            margin-bottom: 0;
+            font-size: 1.3rem;
             font-weight: 600;
         }
 
@@ -848,50 +848,49 @@
 
         .cart-total-value {
             color: var(--primary);
-            font-size: 1.8rem; /* Aumentado tamanho da fonte */
+            font-size: 1.8rem;
             font-weight: bold;
         }
 
-        /* Novo wrapper para o botão flutuante */
+        /* Wrapper para o botão de checkout, fixo na parte inferior do carrinho */
         .checkout-fixed-wrapper {
-            position: absolute; /* Posição absoluta dentro do .cart-sidebar que é fixed */
-            bottom: 0; /* Fica na parte inferior */
+            position: sticky; /* Permite que o elemento "grude" na parte inferior ao rolar */
+            bottom: 0;
             left: 0;
             right: 0;
-            padding: 1.5rem 2rem; /* Mesmo padding dos outros elementos do carrinho */
-            background: var(--light); /* Cor de fundo para cobrir o conteúdo por trás */
+            padding: 1.5rem 2rem;
+            background: var(--light);
             border-top: 1px solid var(--border);
-            box-shadow: 0 -5px 15px var(--shadow); /* Sombra para destacar */
+            box-shadow: 0 -5px 15px var(--shadow);
             z-index: 10; /* Garante que fique acima dos itens roláveis */
         }
 
         [data-theme="dark"] .checkout-fixed-wrapper {
-            background: var(--white); /* Cor de fundo para o tema escuro */
+            background: var(--white);
         }
-
 
         .checkout-btn {
             width: 100%;
             background: var(--success);
             color: var(--white);
             border: none;
-            padding: 1.2rem; /* Aumentado padding */
-            border-radius: 30px; /* Mais arredondado */
-            font-size: 1.2rem; /* Aumentado tamanho da fonte */
-            font-weight: 700; /* Mais negrito */
+            padding: 1.2rem;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.8rem; /* Aumentado espaçamento */
-            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3); /* Sombra mais pronunciada */
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Sombra no texto */
+            gap: 0.8rem;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         .checkout-btn:hover {
             background: #218838;
-            transform: translateY(-3px); /* Efeito de levantar */
+            transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
         }
 
@@ -1221,10 +1220,7 @@
                 order: -1;
             }
 
-            .cart-sidebar {
-                width: 100%;
-                right: -100%;
-            }
+            /* No need for specific cart-sidebar width here, it will be handled by smaller breakpoints */
         }
 
         @media (max-width: 768px) {
@@ -1311,6 +1307,55 @@
             .quantity-selector {
                 justify-content: center;
             }
+
+            /* Ajustes do carrinho para telas menores (até 768px) */
+            .cart-sidebar {
+                width: 100%; /* Ocupa a largura total da tela */
+                right: -100%; /* Esconde o carrinho para a direita */
+                padding-bottom: 80px; /* Garante espaço para o botão de checkout fixo */
+            }
+
+            .cart-sidebar.open {
+                right: 0; /* Abre o carrinho */
+            }
+
+            .cart-header, .cart-items, .cart-footer, .checkout-fixed-wrapper {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .cart-item {
+                flex-wrap: wrap; /* Permite que os itens do carrinho quebrem a linha se necessário */
+                justify-content: center; /* Centraliza os itens quando quebram a linha */
+                position: relative; /* Para posicionar o botão de remover */
+            }
+
+            .cart-item-details {
+                text-align: center;
+                flex-basis: 100%; /* Detalhes ocupam a largura total abaixo da imagem */
+                margin-top: 0.5rem;
+            }
+
+            .cart-item-quantity {
+                justify-content: center;
+                width: 100%; /* Ocupa a largura total */
+                margin-top: 1rem;
+            }
+
+            .remove-item {
+                position: absolute; /* Posiciona o botão de remover no canto do item */
+                top: 0.5rem;
+                right: 0.5rem;
+            }
+
+            .checkout-btn {
+                font-size: 1.1rem; /* Tamanho da fonte ligeiramente menor para mobile */
+                padding: 1rem;
+            }
+
+            .cart-total-value {
+                font-size: 1.6rem; /* Ajusta o tamanho da fonte do total para mobile */
+            }
         }
 
         @media (max-width: 576px) {
@@ -1338,6 +1383,54 @@
 
             .product-card {
                 margin: 0 10px;
+            }
+
+            /* Refinamentos adicionais para telas muito pequenas */
+            .cart-header h3 {
+                font-size: 1.5rem;
+            }
+
+            .cart-header .form-group label {
+                font-size: 0.9rem;
+            }
+
+            .cart-header .form-group input {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+            }
+
+            .cart-item-image {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+            }
+
+            .cart-item-name {
+                font-size: 1rem;
+            }
+
+            .cart-item-price {
+                font-size: 0.95rem;
+            }
+
+            .cart-item-quantity span {
+                font-size: 1rem;
+            }
+
+            .cart-total {
+                font-size: 1.2rem;
+            }
+
+            .cart-total-value {
+                font-size: 1.5rem;
+            }
+
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 25px;
+                bottom: 20px;
+                right: 20px;
             }
         }
 
@@ -1478,7 +1571,7 @@
             <div class="products-grid">
                 <div class="product-card" data-product="PAO QUEIJO 1KG">
                     <div class="product-image">
-                     <img src="https://grlti.github.io/arleuza/imagem/imagem01.jpeg">
+                     <img src="https://grlti.github.io/arleuza/imagem/imagem01.jpeg" alt="Pão de Queijo 1Kg">
                         <div class="product-badge"></div>
                     </div>
                     <div class="product-content">
@@ -1503,7 +1596,7 @@
 
                 <div class="product-card" data-product="PAO QUEIJO 2KG">
                     <div class="product-image">
-                    <img src="https://grlti.github.io/arleuza/imagem/imagem02.jpeg">
+                    <img src="https://grlti.github.io/arleuza/imagem/imagem02.jpeg" alt="Pão de Queijo 2Kg">
                         <div class="product-badge"></div>
                     </div>
                     <div class="product-content">
@@ -1528,7 +1621,7 @@
 
                 <div class="product-card" data-product="PAO QUEIJO 4KG">
                     <div class="product-image">
-                     <img src="https://grlti.github.io/arleuza/imagem/imagem03.jpeg">
+                     <img src="https://grlti.github.io/arleuza/imagem/imagem03.jpeg" alt="Pão de Queijo 4Kg">
                         <div class="product-badge"></div>
                     </div>
                     <div class="product-content">
@@ -1552,7 +1645,7 @@
                 </div>
                 <div class="product-card" data-product="PALITO PROVOLONE 1KG">
                     <div class="product-image">
-                   <img src="https://grlti.github.io/arleuza/imagem/imagem04.jpeg">
+                   <img src="https://grlti.github.io/arleuza/imagem/imagem04.jpeg" alt="Palito Provolone 1Kg">
                         <div class="product-badge"></div>
                     </div>
                     <div class="product-content">
@@ -1719,8 +1812,6 @@
         <span id="notificationText"></span>
     </div>
 
-    </div>
-
     <script>
         // App State
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -1799,7 +1890,8 @@
             const productCard = document.querySelector(`[data-product="${productId}"]`);
             const name = productCard.querySelector('h3').textContent;
             const price = parseFloat(productCard.querySelector('[data-price]').getAttribute('data-price'));
-            const emoji = productCard.querySelector('.product-image').textContent.trim();
+            // Get the image source from the product card
+            const imageSrc = productCard.querySelector('.product-image img').src; 
 
             const existingItem = cart.find(item => item.id === productId);
             
@@ -1811,7 +1903,7 @@
                     name,
                     price,
                     quantity,
-                    emoji
+                    imageSrc // Store the image source
                 });
             }
 
@@ -1859,7 +1951,10 @@
             } else {
                 cartItems.innerHTML = cart.map(item => `
                     <div class="cart-item">
-                        <div class="cart-item-image">${item.emoji}</div>
+                        <!-- Usa a imagem do produto no carrinho -->
+                        <div class="cart-item-image">
+                            <img src="${item.imageSrc}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+                        </div>
                         <div class="cart-item-details">
                             <div class="cart-item-name">${item.name}</div>
                             <div class="cart-item-price">R$ ${item.price.toFixed(2)}</div>
@@ -1944,13 +2039,11 @@
             message += `Telefone do Cliente: ${buyerPhone}\n\n`;
             
             cart.forEach(item => {
-                message += `${item.emoji} ${item.name}\n`;
-                message += `Quantidade: ${item.quantity}\n`;
-                message += `Preço: R$ ${(item.price * item.quantity).toFixed(2)}\n\n`;
+                message += `* ${item.name} (x${item.quantity}) - R$ ${(item.price * item.quantity).toFixed(2)}\n`;
             });
             
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            message += `💰 Total: R$ ${total.toFixed(2)}\n\n`;
+            message += `\n💰 Total: R$ ${total.toFixed(2)}\n\n`;
             message += 'Obrigado!';
             
             const encodedMessage = encodeURIComponent(message);
@@ -1988,7 +2081,13 @@
             // Show install prompt after 30 seconds if not dismissed
             setTimeout(() => {
                 if (!localStorage.getItem('installDismissed')) {
-                    installPrompt.classList.add('show');
+                    // Check if PWA is already installed
+                    if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+                         // PWA is already installed, do not show prompt
+                        console.log('PWA is already installed. Not showing install prompt.');
+                    } else {
+                        installPrompt.classList.add('show');
+                    }
                 }
             }, 30000);
         }
