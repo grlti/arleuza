@@ -707,6 +707,7 @@
             overflow-y: auto;
             padding: 1rem 2rem; /* Ajustado padding */
             -webkit-overflow-scrolling: touch; /* Rolagem suave em iOS */
+            padding-bottom: 150px; /* Adicionado padding-bottom para não esconder o botão flutuante */
         }
 
         .cart-item {
@@ -828,7 +829,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0; /* Removido margin-bottom, já que o botão foi movido */
             font-size: 1.3rem; /* Aumentado tamanho da fonte */
             font-weight: 600;
         }
@@ -842,6 +843,24 @@
             font-size: 1.8rem; /* Aumentado tamanho da fonte */
             font-weight: bold;
         }
+
+        /* Novo wrapper para o botão flutuante */
+        .checkout-fixed-wrapper {
+            position: absolute; /* Posição absoluta dentro do .cart-sidebar que é fixed */
+            bottom: 0; /* Fica na parte inferior */
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem; /* Mesmo padding dos outros elementos do carrinho */
+            background: var(--light); /* Cor de fundo para cobrir o conteúdo por trás */
+            border-top: 1px solid var(--border);
+            box-shadow: 0 -5px 15px var(--shadow); /* Sombra para destacar */
+            z-index: 10; /* Garante que fique acima dos itens roláveis */
+        }
+
+        [data-theme="dark"] .checkout-fixed-wrapper {
+            background: var(--white); /* Cor de fundo para o tema escuro */
+        }
+
 
         .checkout-btn {
             width: 100%;
@@ -1652,7 +1671,6 @@
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
             <h3>Seu Carrinho</h3>
-            <!-- New fields added here -->
             <div class="form-group">
                 <label for="buyerName">Seu Nome:</label>
                 <input type="text" id="buyerName" name="buyerName" placeholder="Nome Completo">
@@ -1670,11 +1688,13 @@
                 <p>Adicione alguns produtos deliciosos!</p>
             </div>
         </div>
-        <div class="cart-footer" id="cartFooter" style="display: none;">
+        <div class="cart-footer" id="cartFooter">
             <div class="cart-total">
                 <span class="cart-total-label">Total:</span>
                 <span class="cart-total-value" id="cartTotal">R$ 0,00</span>
             </div>
+        </div>
+        <div class="checkout-fixed-wrapper">
             <button class="checkout-btn" id="checkoutBtn">
                 📱 Finalizar no WhatsApp
             </button>
@@ -1690,7 +1710,6 @@
     <div class="notification" id="notification">
         <span id="notificationText"></span>
     </div>
-
     </div>
 
     <script>
@@ -1718,6 +1737,7 @@
         const installBtn = document.getElementById('installBtn');
         const dismissBtn = document.getElementById('dismissBtn');
         const mobileMenu = document.getElementById('mobileMenu');
+        const checkoutFixedWrapper = document.querySelector('.checkout-fixed-wrapper'); // Novo elemento
 
         // Initialize App
         document.addEventListener('DOMContentLoaded', function() {
@@ -1826,6 +1846,7 @@
                     </div>
                 `;
                 cartFooter.style.display = 'none';
+                checkoutFixedWrapper.style.display = 'none'; // Esconde o wrapper do botão também
             } else {
                 cartItems.innerHTML = cart.map(item => `
                     <div class="cart-item">
@@ -1844,6 +1865,7 @@
                 `).join('');
                 
                 cartFooter.style.display = 'block';
+                checkoutFixedWrapper.style.display = 'block'; // Mostra o wrapper do botão
                 updateCartTotal();
             }
         }
