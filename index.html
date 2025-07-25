@@ -1660,6 +1660,16 @@
         <span id="notificationText"></span>
     </div>
 
+    <!-- PWA Install Prompt -->
+    <div class="install-prompt" id="installPrompt">
+        <h4>Instalar Sabor DuBom App</h4>
+        <p>Adicione este aplicativo à sua tela inicial para acesso rápido e offline!</p>
+        <div class="install-actions">
+            <button class="install-btn" id="installBtn">Instalar</button>
+            <button class="dismiss-btn" id="dismissBtn">Agora não</button>
+        </div>
+    </div>
+
     <script>
         // App State
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
