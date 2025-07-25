@@ -479,6 +479,14 @@
             overflow: hidden;
         }
 
+        /* Adicionando estilo para as imagens dentro do product-image */
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Garante que a imagem cubra a área, cortando se necessário */
+            border-radius: 20px 20px 0 0; /* Para combinar com o arredondamento do cartão */
+        }
+
         .product-image::before {
             content: '';
             position: absolute;
@@ -1711,7 +1719,6 @@
         <span id="notificationText"></span>
     </div>
 
-    </div>
     </div>
 
     <script>
